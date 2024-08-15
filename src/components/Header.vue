@@ -7,7 +7,7 @@ const handleSelect = (key: string, keyPath: string[]) => {
 </script>
 
 <template>
-  <header>
+  <div>
     <el-menu
     :default-active="activeIndex"
     mode="horizontal"
@@ -27,7 +27,7 @@ const handleSelect = (key: string, keyPath: string[]) => {
       </el-menu-item>
     </el-sub-menu>
   </el-menu>
-</header>
+  </div>
   <RouterView />
 </template>
 
