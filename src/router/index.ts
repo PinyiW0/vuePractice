@@ -6,6 +6,15 @@ const router = createRouter({
       path: '/',
       component: () => import('../views/front/FrontView.vue'),
       children: [
+        { 
+          path: '', // 空路径 
+          redirect: '/home' // 重新導向 home 加了之後才能正常運行
+        },
+        { 
+          path: 'home',
+          name: 'home',
+          component: () => import('../views/front/HomeView.vue'),
+        },
         { // 練習一
           path: 'one',
           name: 'one',
@@ -20,6 +29,11 @@ const router = createRouter({
           path: 'three',
           name: 'three',
           component: () => import('../views/front/PracticeThree.vue'),
+        },
+        { // 練習四
+          path: 'four',
+          name: 'four',
+          component: () => import('../views/front/PracticeFour.vue'),
         },
       ],
     },
