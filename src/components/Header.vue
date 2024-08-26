@@ -8,7 +8,7 @@ const handleSelect = (key: string, keyPath: string[]) => {
 </script>
 
 <template>
-  <div>
+  <div class="pb-5">
     <el-menu :default-active="activeIndex" mode="horizontal" @select="handleSelect">
       <RouterLink to="/home">
         <el-menu-item index="1">
