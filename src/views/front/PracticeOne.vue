@@ -37,7 +37,7 @@ const drinksList = ref<Drink[]>([
 // #endregion
 
 /** 變更價格 */
-const handleValue = (value: any, type: 'price' | 'inventory', min:number, max:number) => {
+const handleValue = (value: any, type: 'price' | 'inventory', min: number, max: number) => {
   editDrink[type] = Math.min(Math.max(value, min), max);
 }
 
@@ -58,10 +58,11 @@ const handleSave = (drink: Drink) => {
   <div class="w-full px-10">
     <div class="p-5">
       <h1>Drinks</h1>
-      <p class="text-sm"><strong>規則: </strong> <strong>1.</strong>可編輯所有欄位 <strong>2.</strong> 價格最低10元最高120元，調整間距為 5 元 <strong>3.</strong>庫存最少最少為 0 最多為 100</p>
+      <p class="text-sm"><strong>規則: </strong> <strong>1.</strong>可編輯所有欄位 <strong>2.</strong> 價格最低10元最高120元，調整間距為 5 元
+        <strong>3.</strong>庫存最少最少為 0 最多為 100</p>
     </div>
-    <el-table :data="drinksList" border>
-      <el-table-column label="品項" width="160" align="center">
+    <el-table :data="drinksList" max-height="250" border>
+      <el-table-column label="品項" width="160" align="center" fixed>
         <template #default="{ row }">
           <span v-if="!row.isEdit">{{ row.drinkName }}</span>
           <el-input v-else v-model="editDrink.drinkName" />
@@ -76,21 +77,23 @@ const handleSave = (drink: Drink) => {
       <el-table-column prop="price" label="價格" width="180" align="center">
         <template #default="{ row }" class="flex gap-5">
           <span v-if="!row.isEdit" class="text-base"><strong>{{ row.price }}</strong></span>
-          <el-input-number v-else @input="handleValue($event,'price', 10, 100)" v-model="editDrink.price" :min="10" :max="120" :step="5"></el-input-number>
+          <el-input-number v-else @input="handleValue($event, 'price', 10, 100)" v-model="editDrink.price" :min="10"
+            :max="120" :step="5"></el-input-number>
         </template>
       </el-table-column>
       <el-table-column prop="inventory" label="庫存" width="200" align="center">
         <template #default="{ row }" class="flex gap-5">
           <span v-if="!row.isEdit" class="text-base"><strong>{{ row.inventory }}</strong></span>
-          <el-input-number v-else @input="handleValue($event, 'inventory', 0, 50)" v-model="editDrink.inventory" :min="0" :max="100" :step="1"></el-input-number>
+          <el-input-number v-else @input="handleValue($event, 'inventory', 0, 50)" v-model="editDrink.inventory"
+            :min="0" :max="100" :step="1"></el-input-number>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="150" align="center">
+      <el-table-column fixed="right" label="操作" width="180" align="center">
         <template #default="{ row }">
           <el-button v-if="!row.isEdit" :icon="Edit" @click="handleEdit(row)" />
           <template v-else class="flex gap-2">
-            <el-button @click="row.isEdit = false" :icon="Close" type="info" plain class="p-2" />
-            <el-button @click="handleSave(row)" :icon="Check" type="success" plain class="p-2" />
+            <el-button @click="row.isEdit = false" :icon="Close" type="info" plain class="p-3 md:p-2" />
+            <el-button @click="handleSave(row)" :icon="Check" type="success" plain class="p-3 md:p-2" />
           </template>
         </template>
       </el-table-column>
